@@ -1,0 +1,14 @@
+{
+  "tokens": 83182267085,
+  "days_covered": 122,
+  "subagent_pct": 48.09163362323282,
+  "subagent_pct_alltime": 32.37797060308573,
+  "cache_pct": 93.03985495045431,
+  "models": 24,
+  "vendors": 9,
+  "peak_sessions": 123,
+  "peak_day": "2026-07-28",
+  "window_days": 30,
+  "rank": 11,
+  "tier": "Supernova"
+}
