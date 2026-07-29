@@ -114,7 +114,8 @@ The badges above are not hand-typed, and the story of why they exist is the reas
 
 Every usage dashboard on my machine was wrong in a different way. One was reading a cache that had not updated in four months. Another counted characters instead of tokens. All of them either double-counted subagent transcripts or could not see them at all. So the reported estate was ~35B tokens.
 
-The real number was **81.7B**. Three things had gone wrong:
+The audit put it at **81.7B** — the figure above is higher because it keeps moving. Three
+things had gone wrong:
 
 1. **Claude Code deletes transcripts after 30 days** by default (`cleanupPeriodDays`). April and May were simply gone from disk. The tell was that a cumulative counter had *fallen* — 56.62B in May, 46.90B in June. A total that decreases is proof of deletion, not of lower usage.
 2. **"Per-event data always wins" discarded 11.78B** of real subagent burn, because archive sources sometimes hold sessions the per-event stream never captured. The correct rule is max-per-session: both sources are floors.
