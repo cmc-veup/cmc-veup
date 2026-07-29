@@ -56,13 +56,15 @@ Blue is work I direct. Amber is work the swarm directs on its own — about half
 
 I run an AWS partner business where delivery is increasingly executed by agent swarms rather than by hand. That is a claim people make loosely, so here is what it concretely means day to day.
 
+<!-- BEGIN LIVE-TABLE -->
 | | |
 |---|---|
-| **Scale** | 123 sustained concurrent agent sessions at peak, median 24. Not a burst — sustained across a working day, against a shared work queue. |
-| **Fan-out** | ~49% of all tokens are spent by subagents. Half the work is delegated by other agents, not by me. |
+| **Scale** | 123 sustained concurrent agent sessions at peak on 2026-07-28. Not a burst — sustained across a working day, against a shared work queue. |
+| **Fan-out** | 48% of recent tokens are spent by subagents. Much of the work is delegated by other agents, not by me. |
 | **Provider diversity** | 24 models across 9 labs. No single-vendor dependency, and routing is a decision the model makes, not a hardcoded table. |
-| **Cost discipline** | 93% cache hit rate. Cache is the difference between a swarm being affordable and being a science project. |
+| **Cost discipline** | 93% of tokens served from cache. Cache is the difference between a swarm being affordable and being a science project. |
 | **Accounting** | Every token attributed to a model, an account, a session, and a cost — priced at the rate in force *when it was spent*, not today's rate. |
+<!-- END LIVE-TABLE -->
 
 The interesting problems at this scale are not prompting problems. They are coordination, attribution, recovery, and measurement problems — which is why most of what I build is infrastructure rather than applications.
 

@@ -1,9 +1,9 @@
 {
-  "tokens": 83182267085,
+  "tokens": 83186855637,
   "days_covered": 122,
-  "subagent_pct": 48.09163362323282,
-  "subagent_pct_alltime": 32.37797060308573,
-  "cache_pct": 93.03985495045431,
+  "subagent_pct": 48.08432401458117,
+  "subagent_pct_alltime": 32.37692401815608,
+  "cache_pct": 93.04041164440083,
   "models": 24,
   "vendors": 9,
   "peak_sessions": 123,
