@@ -51,6 +51,7 @@ on which model, from which account, at what cost, and how much of it is fan-out.
 |---|---|
 | [**flightdeck**](https://github.com/cmc-veup/flightdeck) | Truthful multi-provider token accounting for local AI coding agents. Recovers months that Claude Code deleted, reports subagent spend as a first-class dimension, and submits to the leaderboard without laundering the numbers through a tool that regenerates them. |
 | [**zfc**](https://github.com/cmc-veup/zfc-skill) | Zero Framework Cognition — an agent skill that keeps judgment in the model and heuristics out of the application. Every regex you write against model output is a bet against the next model. |
+| [**claude-cli-oauth-brain-transport**](https://github.com/cmc-veup/claude-cli-oauth-brain-transport-skill) | Using the Claude CLI as a first-class inference path for swarm orchestration: what the print-mode envelope actually guarantees, why `--json-schema` doesn't constrain it, and how to get reliably parseable output anyway. |
 
 ### Not public
 
