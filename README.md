@@ -59,7 +59,7 @@ finished enough to hand someone. The shape of it:
 
 | | |
 |---|---|
-| **Tropical algebra at the edge** | Embedded intelligence in the min-plus semiring — full-fidelity inference with sub-millisecond determinism, on hardware that has no business running a model. |
+| **Tropical attention at the edge** | Max-plus idempotent attention in place of softmax: every multiply collapses to add-and-compare, so inference maps onto a systolic array with structurally predictable latency and no floating-point drift — full fidelity, sub-millisecond, on hardware that has no business running a model. Exact routes fall out of it, which means real attributions and an ℓ∞ robustness certificate rather than a saliency map. Built on [model_guided_research](https://github.com/Dicklesworthstone/model_guided_research); carried into on-device safety inference and a scoring engine. |
 | **Swarm orchestration** | Running agents by the hundred against a shared work queue: leases, federation, recovery, and the accounting that proves what they actually cost. |
 | **Meeting intelligence** | Local-first Mac capture. Transcription and diarization on-device; audio never leaves the machine, only text reaches a model. |
 | **A unified tool server** | One MCP surface over the dozen-odd business systems delivery actually runs on, so an agent gets a single contract instead of a dozen auth dances. |
