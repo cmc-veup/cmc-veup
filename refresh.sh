@@ -15,7 +15,7 @@ TIER="${VIBERANK_TIER:-Supernova}"
 
 cd "$FLIGHTDECK"
 python3 -m flightdeck.cli collect --quiet
-python3 -m flightdeck.cli badges --out "$PROFILE" --rank "$RANK" --rank-total "${VIBERANK_TOTAL:-1000}" --days 30 >/dev/null
+python3 -m flightdeck.cli badges --out "$PROFILE" --rank "$RANK" --tier "$TIER" --days 30 >/dev/null
 
 cd "$PROFILE"
 git add badges usage.svg
