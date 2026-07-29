@@ -45,12 +45,28 @@ on which model, from which account, at what cost, and how much of it is fan-out.
 
 ## What I'm building
 
+### Public
+
 | | |
 |---|---|
 | [**flightdeck**](https://github.com/cmc-veup/flightdeck) | Truthful multi-provider token accounting for local AI coding agents. Recovers months that Claude Code deleted, reports subagent spend as a first-class dimension, and submits to the leaderboard without laundering the numbers through a tool that regenerates them. |
+| [**zfc**](https://github.com/cmc-veup/zfc-skill) | Zero Framework Cognition — an agent skill that keeps judgment in the model and heuristics out of the application. Every regex you write against model output is a bet against the next model. |
 
-More to come — a Zero Framework Cognition skill, and a write-up on using the Claude CLI as a
-subscription-billed inference transport for backend services.
+### Not public
+
+Most of the work isn't open source — it either encodes something client-specific or isn't
+finished enough to hand someone. The shape of it:
+
+| | |
+|---|---|
+| **Tropical algebra at the edge** | Embedded intelligence in the min-plus semiring — full-fidelity inference with sub-millisecond determinism, on hardware that has no business running a model. |
+| **Swarm orchestration** | Running agents by the hundred against a shared work queue: leases, federation, recovery, and the accounting that proves what they actually cost. |
+| **Meeting intelligence** | Local-first Mac capture. Transcription and diarization on-device; audio never leaves the machine, only text reaches a model. |
+| **A unified tool server** | One MCP surface over the dozen-odd business systems delivery actually runs on, so an agent gets a single contract instead of a dozen auth dances. |
+| **Autonomous operating reports** | Agents that assemble the monthly estate review, where every claim has to link to a receipt or it doesn't ship. |
+| **Delivery practice** | Forward-deployed engineering, AI-DLC, and living roadmaps that stay current because agents maintain them rather than people remembering to. |
+
+What generalizes gets extracted and published here. What encodes a client stays in.
 
 ## What I do
 
