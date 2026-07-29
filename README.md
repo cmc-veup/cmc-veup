@@ -2,7 +2,16 @@
 
 # Christian McCaffrey
 
-**CEO, [VeUP](https://veup.com)** · Florida
+**CEO, [VeUP](https://veup.com)** · Florida · AWS Partner
+
+![Rust](https://img.shields.io/badge/-Rust-2b2b2b?style=flat-square&logo=rust&logoColor=dea584)
+![Swift](https://img.shields.io/badge/-Swift-2b2b2b?style=flat-square&logo=swift&logoColor=F05138)
+![Python](https://img.shields.io/badge/-Python-2b2b2b?style=flat-square&logo=python&logoColor=3776AB)
+![TypeScript](https://img.shields.io/badge/-TypeScript-2b2b2b?style=flat-square&logo=typescript&logoColor=3178C6)
+![JAX](https://img.shields.io/badge/-JAX-2b2b2b?style=flat-square&logo=google&logoColor=white)
+![DuckDB](https://img.shields.io/badge/-DuckDB-2b2b2b?style=flat-square&logo=duckdb&logoColor=FFF000)
+![Claude](https://img.shields.io/badge/-Claude-2b2b2b?style=flat-square&logo=anthropic&logoColor=d4a27f)
+![AWS](https://img.shields.io/badge/-AWS-2b2b2b?style=flat-square&logo=amazonwebservices&logoColor=FF9900)
 
 *Client delivery runs on an agent swarm. The tooling is public and the numbers are audited.*
 
@@ -16,10 +25,13 @@
 [![LinkedIn](https://img.shields.io/badge/LinkedIn-2b2b2b?style=flat-square&logo=linkedin&logoColor=0A66C2)](https://www.linkedin.com/in/cbxmc/)
 [![VeUP](https://img.shields.io/badge/veup.com-2b2b2b?style=flat-square&logo=google-chrome&logoColor=white)](https://veup.com)
 
-
-`Multi-Agent Delivery` · `Agentic Coding` · `AWS` · `Rust` · `Swift` · `Local-First AI`
+`Multi-Agent Delivery` · `Agentic Coding` · `Tropical Attention` · `AWS` · `Rust` · `Swift` · `Local-First AI`
 
 </div>
+
+<p align="center">
+<a href="#the-operating-model">Operating Model</a> · <a href="#open-source">Open Source</a> · <a href="#research">Research</a> · <a href="#not-public">Not Public</a> · <a href="#how-the-numbers-are-made">Instrumentation</a> · <a href="#principles">Principles</a>
+</p>
 
 ---
 
@@ -29,47 +41,100 @@
 
 Blue is work I direct. Amber is work the swarm directs on its own — about half of it.
 
+> [!NOTE]
+> **81.7B tokens across 126 days**, on 24 models from 9 labs, 93% of it served from cache.
+> Roughly half was spent by subagents rather than by me typing. These are not
+> estimates — they are reconciled from the transcripts on disk by
+> [flightdeck](https://github.com/cmc-veup/flightdeck), and the badges above
+> regenerate hourly.
+
 ---
 
-## The numbers above are live
+## The Operating Model
 
-They are not hand-typed. Every badge and the chart are regenerated hourly by
-[**flightdeck**](https://github.com/cmc-veup/flightdeck), a collector I wrote after discovering
-that every usage dashboard on my machine was wrong in a different way — one was reading a cache
-that had not updated in four months, another counted characters instead of tokens, and all of
-them either double-counted subagent transcripts or could not see them at all.
-
-It reads the transcripts that Claude Code, Codex, Grok and everything behind a Claude Code shell
-already write to disk, and answers the question those tools kept getting wrong: how many tokens,
-on which model, from which account, at what cost, and how much of it is fan-out.
-
-## What I'm building
-
-### Public
+I run an AWS partner business where delivery is increasingly executed by agent swarms rather than by hand. That is a claim people make loosely, so here is what it concretely means day to day.
 
 | | |
 |---|---|
-| [**flightdeck**](https://github.com/cmc-veup/flightdeck) | Truthful multi-provider token accounting for local AI coding agents. Recovers months that Claude Code deleted, reports subagent spend as a first-class dimension, and submits to the leaderboard without laundering the numbers through a tool that regenerates them. |
-| [**zfc**](https://github.com/cmc-veup/zfc-skill) | Zero Framework Cognition — an agent skill that keeps judgment in the model and heuristics out of the application. Every regex you write against model output is a bet against the next model. |
-| [**claude-cli-oauth-brain-transport**](https://github.com/cmc-veup/claude-cli-oauth-brain-transport-skill) | Using the Claude CLI as a first-class inference path for swarm orchestration: what the print-mode envelope actually guarantees, why `--json-schema` doesn't constrain it, and how to get reliably parseable output anyway. |
+| **Scale** | 123 sustained concurrent agent sessions at peak, median 24. Not a burst — sustained across a working day, against a shared work queue. |
+| **Fan-out** | ~49% of all tokens are spent by subagents. Half the work is delegated by other agents, not by me. |
+| **Provider diversity** | 24 models across 9 labs. No single-vendor dependency, and routing is a decision the model makes, not a hardcoded table. |
+| **Cost discipline** | 93% cache hit rate. Cache is the difference between a swarm being affordable and being a science project. |
+| **Accounting** | Every token attributed to a model, an account, a session, and a cost — priced at the rate in force *when it was spent*, not today's rate. |
 
-### Not public
+The interesting problems at this scale are not prompting problems. They are coordination, attribution, recovery, and measurement problems — which is why most of what I build is infrastructure rather than applications.
 
-Most of the work isn't open source — it either encodes something client-specific or isn't
-finished enough to hand someone. The shape of it:
+---
+
+## Open Source
+
+| Project | Lang | What it does |
+|:--------|:----:|:-------------|
+| [**flightdeck**](https://github.com/cmc-veup/flightdeck) | ![Python](https://img.shields.io/badge/-Python-3776AB?style=flat-square&logo=python&logoColor=white) | Truthful multi-provider token accounting for local AI coding agents. Reads the transcripts Claude Code, Codex, Grok and anything behind a Claude Code shell already write to disk. Recovers months the tooling deleted, treats subagent spend as a first-class dimension, and prices every token at the rate in force when it was spent. |
+| [**zfc**](https://github.com/cmc-veup/zfc-skill) | ![Markdown](https://img.shields.io/badge/-Skill-2b2b2b?style=flat-square&logo=markdown&logoColor=white) | Zero Framework Cognition (Yegge) as an agent skill. Keep judgment in the model and heuristics out of the application. Violation catalog, audit playbook, model routing, identity discipline. Every regex you write against model output is a bet against the next model. |
+| [**claude-cli-oauth-brain-transport**](https://github.com/cmc-veup/claude-cli-oauth-brain-transport-skill) | ![Bash](https://img.shields.io/badge/-Bash-4EAA25?style=flat-square&logo=gnu-bash&logoColor=white) | Using the Claude CLI as a first-class inference path for swarm orchestration. What the print-mode envelope actually guarantees, why `--json-schema` does not constrain it, and how to get reliably parseable output anyway. |
+
+---
+
+## Research
+
+**Tropical attention at the edge.** Replacing softmax with the max-plus (tropical) semiring, where `a ⊕ b = max(a,b)` and `a ⊗ b = a + b`. Every multiplication collapses into add-and-compare, which changes what the hardware has to be:
+
+- **Structurally predictable latency.** Re-bracketing attention as `(V ⊗ Kᵀ) ⊗ Q` never materializes the L×L matrix, so it maps onto an add/compare systolic array. Sub-millisecond determinism becomes a property of the algebra rather than something you measure and hope for.
+- **Full fidelity.** No floating-point accumulation, so results are exact rather than approximately reproducible.
+- **Interpretability that is not a heatmap.** The argmax at each node *is* a discrete route. You get genuine attributions and an ℓ∞ robustness certificate of radius ≥ min-gap/2 — a proof, not a saliency picture.
+
+Built on Jeffrey Emanuel's [model_guided_research](https://github.com/Dicklesworthstone/model_guided_research), which explores eleven exotic mathematical structures as drop-in attention mechanisms. Carried into on-device safety inference and a scoring engine.
+
+---
+
+## Not Public
+
+Most of the work is not open source — it either encodes something client-specific or is not finished enough to hand someone. The shape of it:
 
 | | |
 |---|---|
-| **Tropical attention at the edge** | Max-plus idempotent attention in place of softmax: every multiply collapses to add-and-compare, so inference maps onto a systolic array with structurally predictable latency and no floating-point drift — full fidelity, sub-millisecond, on hardware that has no business running a model. Exact routes fall out of it, which means real attributions and an ℓ∞ robustness certificate rather than a saliency map. Built on [model_guided_research](https://github.com/Dicklesworthstone/model_guided_research); carried into on-device safety inference and a scoring engine. |
 | **Swarm orchestration** | Running agents by the hundred against a shared work queue: leases, federation, recovery, and the accounting that proves what they actually cost. |
 | **Meeting intelligence** | Local-first Mac capture. Transcription and diarization on-device; audio never leaves the machine, only text reaches a model. |
 | **A unified tool server** | One MCP surface over the dozen-odd business systems delivery actually runs on, so an agent gets a single contract instead of a dozen auth dances. |
-| **Autonomous operating reports** | Agents that assemble the monthly estate review, where every claim has to link to a receipt or it doesn't ship. |
+| **Autonomous operating reports** | Agents that assemble the monthly estate review, where every claim has to link to a receipt or it does not ship. |
 | **Delivery practice** | Forward-deployed engineering, AI-DLC, and living roadmaps that stay current because agents maintain them rather than people remembering to. |
 
 What generalizes gets extracted and published here. What encodes a client stays in.
 
-## What I do
+---
 
-I run [VeUP](https://veup.com), an AWS partner. The work I care about is at the frontier:
-delivery executed by agent swarms, measured honestly enough to trust.
+## How the Numbers Are Made
+
+The badges above are not hand-typed, and the story of why they exist is the reason I trust them.
+
+Every usage dashboard on my machine was wrong in a different way. One was reading a cache that had not updated in four months. Another counted characters instead of tokens. All of them either double-counted subagent transcripts or could not see them at all. So the reported estate was ~35B tokens.
+
+The real number was **81.7B**. Three things had gone wrong:
+
+1. **Claude Code deletes transcripts after 30 days** by default (`cleanupPeriodDays`). April and May were simply gone from disk. The tell was that a cumulative counter had *fallen* — 56.62B in May, 46.90B in June. A total that decreases is proof of deletion, not of lower usage.
+2. **"Per-event data always wins" discarded 11.78B** of real subagent burn, because archive sources sometimes hold sessions the per-event stream never captured. The correct rule is max-per-session: both sources are floors.
+3. **22% of tokens were priced at $0** because they matched no pricing pattern, and one model was seeded 4× low.
+
+flightdeck exists so those failures are detectable rather than silent. It reconciles across sources, prices with effective dating, and reports the percentage of tokens matching no pricing rule so a silent $0 can never masquerade as thrift.
+
+---
+
+## Principles
+
+**Structure in code, judgment in the model.** The application is dumb pipes; the model is the smart endpoint. Schema validation, budget caps, and retry policy belong in code. Ranking, classification, and "is this done" belong to the model. Every heuristic is a bet against the next model release, and that bet has lost every quarter so far.
+
+**A number you cannot audit is a number you cannot manage.** Most of this industry is reporting AI usage figures nobody has checked. Mine are checkable, which is the entire reason the collector is public.
+
+**Receipts or it did not happen.** Internal reporting rule: every claim links to a diff, a test, or a demo. Prose that cannot cite itself gets cut.
+
+**Identity comes from email, never display name.** Fuzzy matching is a last resort, never an entry point. An unresolvable entity stays unresolved rather than minting a junk canonical ID — the alternative is a corpus that quietly grows 290 records into 1,214.
+
+---
+
+## Connect
+
+I run [VeUP](https://veup.com), an AWS partner. The work I care about is at the frontier: delivery executed by agent swarms, measured honestly enough to trust.
+
+[![LinkedIn](https://img.shields.io/badge/LinkedIn-cbxmc-2b2b2b?style=flat-square&logo=linkedin&logoColor=0A66C2)](https://www.linkedin.com/in/cbxmc/)
+[![viberank](https://img.shields.io/badge/viberank-cmc--veup-2b2b2b?style=flat-square&logo=speedtest&logoColor=white)](https://viberank.app/profile/cmc-veup)
