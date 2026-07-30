@@ -54,28 +54,38 @@ import json, pathlib
 m = json.loads(pathlib.Path("badges/metrics.json").read_text())
 body = (
     "> [!NOTE]\n"
-    f"> **{m['tokens']/1e9:.1f}B tokens across {m['days_covered']} days**, on "
-    f"{m['models']} models from {m['vendors']} labs, {m['cache_pct']:.0f}% of it served\n"
-    f"> from cache. About {m['subagent_pct']:.0f}% was spent by subagents rather than by me\n"
-    "> typing. These are not estimates — they are reconciled from the transcripts on\n"
-    "> disk by [flightdeck](https://github.com/cmc-veup/flightdeck), and this paragraph\n"
-    "> is regenerated hourly from the same data as the badges above."
+    f"> **{m['tokens']/1e9:.1f}B tokens** over {m['days_active']} active days "
+    f"({m['span_start']} to {m['span_end']}), on\n"
+    f"> {m['models']} models from {m['vendors']} labs. {m['cache_read_pct']:.0f}% of tokens were "
+    f"cache reads. Subagents spent\n"
+    f"> {m['subagent_pct_alltime']:.0f}% of the all-time total and "
+    f"{m['subagent_pct']:.0f}% over the last {m['window_days']} days. "
+    f"{100-m['unpriced_pct']-m['estimated_pct']:.0f}% of tokens are\n"
+    "> priced from a published rate card. Reconciled by "
+    "[flightdeck](https://github.com/cmc-veup/flightdeck) from the transcripts\n"
+    "> on disk plus archives of the months Claude Code deleted; April is still "
+    "missing, so\n"
+    "> this is a floor. Regenerated hourly from the same data as the badges above."
 )
+
 table = "\n".join([
     "| | |",
     "|---|---|",
-    f"| **Scale** | {m['peak_sessions']} sustained concurrent agent sessions at peak"
-    f"{' on ' + m['peak_day'] if m.get('peak_day') else ''}. Not a burst — sustained"
-    " across a working day, against a shared work queue. |",
-    f"| **Fan-out** | {m['subagent_pct']:.0f}% of recent tokens are spent by subagents."
-    " Much of the work is delegated by other agents, not by me. |",
-    f"| **Provider diversity** | {m['models']} models across {m['vendors']} labs. No"
-    " single-vendor dependency, and routing is a decision the model makes, not a"
-    " hardcoded table. |",
-    f"| **Cost discipline** | {m['cache_pct']:.0f}% of tokens served from cache. Cache is"
-    " the difference between a swarm being affordable and being a science project. |",
-    "| **Accounting** | Every token attributed to a model, an account, a session, and a"
-    " cost — priced at the rate in force *when it was spent*, not today's rate. |",
+    f"| **Scale** | {m['peak_sessions']} concurrent agent sessions in a 10-minute "
+    f"window on {m.get('peak_day') or 'the peak day'}, each with 5+ events. Bursty by "
+    "nature — the swarm is spun up per wave of work, not held open. |",
+    f"| **Fan-out** | Subagents spend {m['subagent_pct_alltime']:.0f}% of all tokens, "
+    f"{m['subagent_pct']:.0f}% over the last {m['window_days']} days. Work delegated by "
+    "other agents, not by me. |",
+    f"| **Provider diversity** | {m['models']} models across {m['vendors']} labs, though "
+    f"one carries {m['top_vendor_pct']:.0f}% of spend — the alternates are wired and "
+    "exercised, not load-bearing. |",
+    f"| **Cost discipline** | {m['cache_read_pct']:.0f}% of tokens are cache reads at a "
+    "tenth of input price. Cache is the difference between a swarm being affordable "
+    "and being a science project. |",
+    f"| **Accounting** | {100-m['unpriced_pct']-m['estimated_pct']:.0f}% of tokens priced "
+    f"from a published card, {m['estimated_pct']:.1f}% estimated, {m['unpriced_pct']:.1f}% "
+    "unpriced — at the rate in force *when spent*. |",
 ])
 
 p = pathlib.Path("README.md"); t = p.read_text()
