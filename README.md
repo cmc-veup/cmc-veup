@@ -57,7 +57,7 @@ I run an AWS partner business where delivery is increasingly executed by agent s
 <!-- BEGIN LIVE-TABLE -->
 | | |
 |---|---|
-| **Scale** | Elastic: zero between waves, 170–504 agents during one, 115 concurrent at peak. Nothing idles. |
+| **Scale** | 0 → 620 agents, elastic · typical wave 170–504 · 115 concurrent at peak |
 | **Fan-out** | 47% of recent tokens spent by subagents; 38% across the months whose transcripts survived. |
 | **Provider diversity** | 24 models, 9 labs — though one carries 82% of spend. |
 | **Cost discipline** | 89% of tokens are cache reads, at a tenth of input price. |
