@@ -43,13 +43,9 @@ Blue is work I direct. Amber is work the swarm directs on its own — about half
 
 <!-- BEGIN LIVE-SUMMARY -->
 > [!NOTE]
-> **85.1B tokens** over 123 active days (2026-02-10 to 2026-07-30), on
-> 24 models from 9 labs. 89% of tokens were cache reads. Subagents spent
-> 47% of tokens over the last 30 days (38% across every month whose
-> transcripts survived). 99% of tokens are
-> priced from a published rate card. Reconciled by [flightdeck](https://github.com/cmc-veup/flightdeck) from the transcripts
-> on disk plus archives of the months Claude Code deleted; April is still missing, so
-> this is a floor. Regenerated hourly from the same data as the badges above.
+> **85.2B tokens** over 123 active days · 24 models · 9 labs · 89% cache reads · 47% spent by subagents.
+> Reconciled by [flightdeck](https://github.com/cmc-veup/flightdeck) from transcripts on disk, plus archives of the
+> months Claude Code deleted. April is still gone, so this is a floor. Regenerated hourly.
 <!-- END LIVE-SUMMARY -->
 
 ---
@@ -61,11 +57,11 @@ I run an AWS partner business where delivery is increasingly executed by agent s
 <!-- BEGIN LIVE-TABLE -->
 | | |
 |---|---|
-| **Scale** | 503 agents run on 2026-07-30, peaking at 115 concurrent and holding 100+ for 60 minutes. Swarms breathe: they scale to a wave of work and contract when it clears — the throughput is the point, not a headcount held open. |
-| **Fan-out** | Subagents spend 47% of recent tokens, 38% across the 3 months whose transcripts survived. The 3 damaged months read lower only because their subagent transcripts were deleted before anything indexed them — so the all-time figure is a floor, not a measurement. |
-| **Provider diversity** | 24 models across 9 labs, though one carries 82% of spend — the alternates are wired and exercised, not load-bearing. |
-| **Cost discipline** | 89% of tokens are cache reads at a tenth of input price. Cache is the difference between a swarm being affordable and being a science project. |
-| **Accounting** | 99% of tokens priced from a published card, 1.3% estimated, 0.0% unpriced — at the rate in force *when spent*. |
+| **Scale** | Elastic: zero between waves, 170–504 agents during one, 115 concurrent at peak. Nothing idles. |
+| **Fan-out** | 47% of recent tokens spent by subagents; 38% across the months whose transcripts survived. |
+| **Provider diversity** | 24 models, 9 labs — though one carries 82% of spend. |
+| **Cost discipline** | 89% of tokens are cache reads, at a tenth of input price. |
+| **Accounting** | 99% priced from a published card, 1.3% estimated, 0.0% unpriced — at the rate in force *when spent*. |
 <!-- END LIVE-TABLE -->
 
 The interesting problems at this scale are not prompting problems. They are coordination, attribution, recovery, and measurement problems — which is why most of what I build is infrastructure rather than applications.
