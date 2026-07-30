@@ -54,41 +54,28 @@ import json, pathlib
 m = json.loads(pathlib.Path("badges/metrics.json").read_text())
 body = (
     "> [!NOTE]\n"
-    f"> **{m['tokens']/1e9:.1f}B tokens** over {m['days_active']} active days "
-    f"({m['span_start']} to {m['span_end']}), on\n"
-    f"> {m['models']} models from {m['vendors']} labs. {m['cache_read_pct']:.0f}% of tokens were "
-    f"cache reads. Subagents spent\n"
-    f"> {m['subagent_pct']:.0f}% of tokens over the last {m['window_days']} days "
-    f"({m['subagent_pct_intact']:.0f}% across every month whose\n> transcripts survived). "
-    f"{100-m['unpriced_pct']-m['estimated_pct']:.0f}% of tokens are\n"
-    "> priced from a published rate card. Reconciled by "
-    "[flightdeck](https://github.com/cmc-veup/flightdeck) from the transcripts\n"
-    "> on disk plus archives of the months Claude Code deleted; April is still "
-    "missing, so\n"
-    "> this is a floor. Regenerated hourly from the same data as the badges above."
+    f"> **{m['tokens']/1e9:.1f}B tokens** over {m['days_active']} active days · "
+    f"{m['models']} models · {m['vendors']} labs · {m['cache_read_pct']:.0f}% cache reads · "
+    f"{m['subagent_pct']:.0f}% spent by subagents.\n"
+    "> Reconciled by [flightdeck](https://github.com/cmc-veup/flightdeck) from transcripts on "
+    "disk, plus archives of the\n> months Claude Code deleted. April is still gone, so this is "
+    "a floor. Regenerated hourly."
 )
 
 table = "\n".join([
     "| | |",
     "|---|---|",
-    f"| **Scale** | {m['swarm_agents']} agents run on {m.get('peak_day')}, peaking at "
-    f"{m['swarm_peak']} concurrent and holding 100+ for {m['swarm_held_100']} minutes. Swarms "
-    "breathe: they scale to a wave of work and contract when it clears — the throughput is "
-    "the point, not a headcount held open. |",
-    f"| **Fan-out** | Subagents spend {m['subagent_pct']:.0f}% of recent tokens, "
-    f"{m['subagent_pct_intact']:.0f}% across the {m['intact_months']} months whose transcripts "
-    f"survived. The {m['damaged_months']} damaged months read lower only because their subagent "
-    "transcripts were deleted before anything indexed them — so the all-time figure is a floor, "
-    "not a measurement. |",
-    f"| **Provider diversity** | {m['models']} models across {m['vendors']} labs, though "
-    f"one carries {m['top_vendor_pct']:.0f}% of spend — the alternates are wired and "
-    "exercised, not load-bearing. |",
-    f"| **Cost discipline** | {m['cache_read_pct']:.0f}% of tokens are cache reads at a "
-    "tenth of input price. Cache is the difference between a swarm being affordable "
-    "and being a science project. |",
-    f"| **Accounting** | {100-m['unpriced_pct']-m['estimated_pct']:.0f}% of tokens priced "
-    f"from a published card, {m['estimated_pct']:.1f}% estimated, {m['unpriced_pct']:.1f}% "
-    "unpriced — at the rate in force *when spent*. |",
+    f"| **Scale** | Elastic: zero between waves, {m['wave_min']}–{m['wave_max']} agents during "
+    f"one, {m['swarm_peak']} concurrent at peak. Nothing idles. |",
+    f"| **Fan-out** | {m['subagent_pct']:.0f}% of recent tokens spent by subagents; "
+    f"{m['subagent_pct_intact']:.0f}% across the months whose transcripts survived. |",
+    f"| **Provider diversity** | {m['models']} models, {m['vendors']} labs — though one carries "
+    f"{m['top_vendor_pct']:.0f}% of spend. |",
+    f"| **Cost discipline** | {m['cache_read_pct']:.0f}% of tokens are cache reads, at a tenth "
+    "of input price. |",
+    f"| **Accounting** | {100-m['unpriced_pct']-m['estimated_pct']:.0f}% priced from a published "
+    f"card, {m['estimated_pct']:.1f}% estimated, {m['unpriced_pct']:.1f}% unpriced — at the rate "
+    "in force *when spent*. |",
 ])
 
 p = pathlib.Path("README.md"); t = p.read_text()
