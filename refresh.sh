@@ -10,12 +10,38 @@ set -euo pipefail
 
 PROFILE="${PROFILE_REPO:-$HOME/projects/cmc-veup-profile}"
 FLIGHTDECK="${FLIGHTDECK_REPO:-$HOME/projects/flightdeck}"
-RANK="${VIBERANK_RANK:-11}"
+# Rank and tier come from the live board, never a constant. They were hardcoded
+# to "#11 · Supernova" and kept republishing that after the real position had
+# moved to #12 — a stale claim on the one badge whose whole purpose is a live
+# position. If the fetch fails we keep the previous badge rather than assert a
+# number we did not just verify.
+# rank-watch prints its human summary on stderr and JSON on stdout, so parse
+# the JSON — grepping the text after 2>/dev/null silently matches nothing.
+# `|| true`: a board fetch that fails must not abort the whole refresh under
+# `set -e`. An empty RANK is handled below by keeping the previous badge.
+RANK=$(python3 "$HOME/.claude/skills/flightdeck-operations/scripts/rank-watch.py" \
+         --user "${VIBERANK_USER:-cmc-veup}" 2>/dev/null | python3 -c "
+import json,sys
+t=sys.stdin.read()
+try: print(json.loads(t[t.index('{'):]).get('rank') or '')
+except Exception: print('')" 2>/dev/null || true)
+
+# Tier is NOT in the board payload — it is a viberank UI band, so it cannot be
+# fetched and stays configurable. Rank is the part that actually moves.
 TIER="${VIBERANK_TIER:-Supernova}"
 
 cd "$FLIGHTDECK"
 python3 -m flightdeck.cli collect --quiet
-python3 -m flightdeck.cli badges --out "$PROFILE" --rank "$RANK" --tier "$TIER" --days 30 >/dev/null
+# No rank fetched: regenerate every other badge and leave viberank.json as it
+# was. Publishing a guessed position is worse than publishing yesterday's.
+if [ -n "$RANK" ]; then
+  python3 -m flightdeck.cli badges --out "$PROFILE" --rank "$RANK" --tier "$TIER" --days 30 >/dev/null
+else
+  echo "profile: rank fetch failed — keeping the previous viberank badge" >&2
+  cp -f "$PROFILE/badges/viberank.json" /tmp/viberank.keep 2>/dev/null || true
+  python3 -m flightdeck.cli badges --out "$PROFILE" --days 30 >/dev/null
+  cp -f /tmp/viberank.keep "$PROFILE/badges/viberank.json" 2>/dev/null || true
+fi
 
 cd "$PROFILE"
 
