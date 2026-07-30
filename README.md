@@ -43,11 +43,12 @@ Blue is work I direct. Amber is work the swarm directs on its own — about half
 
 <!-- BEGIN LIVE-SUMMARY -->
 > [!NOTE]
-> **84.8B tokens across 123 days**, on 24 models from 9 labs, 93% of it served
-> from cache. About 47% was spent by subagents rather than by me
-> typing. These are not estimates — they are reconciled from the transcripts on
-> disk by [flightdeck](https://github.com/cmc-veup/flightdeck), and this paragraph
-> is regenerated hourly from the same data as the badges above.
+> **85.0B tokens** over 123 active days (2026-02-10 to 2026-07-30), on
+> 24 models from 9 labs. 89% of tokens were cache reads. Subagents spent
+> 32% of the all-time total and 47% over the last 30 days. 99% of tokens are
+> priced from a published rate card. Reconciled by [flightdeck](https://github.com/cmc-veup/flightdeck) from the transcripts
+> on disk plus archives of the months Claude Code deleted; April is still missing, so
+> this is a floor. Regenerated hourly from the same data as the badges above.
 <!-- END LIVE-SUMMARY -->
 
 ---
@@ -59,11 +60,11 @@ I run an AWS partner business where delivery is increasingly executed by agent s
 <!-- BEGIN LIVE-TABLE -->
 | | |
 |---|---|
-| **Scale** | 123 sustained concurrent agent sessions at peak on 2026-07-28. Not a burst — sustained across a working day, against a shared work queue. |
-| **Fan-out** | 47% of recent tokens are spent by subagents. Much of the work is delegated by other agents, not by me. |
-| **Provider diversity** | 24 models across 9 labs. No single-vendor dependency, and routing is a decision the model makes, not a hardcoded table. |
-| **Cost discipline** | 93% of tokens served from cache. Cache is the difference between a swarm being affordable and being a science project. |
-| **Accounting** | Every token attributed to a model, an account, a session, and a cost — priced at the rate in force *when it was spent*, not today's rate. |
+| **Scale** | 123 concurrent agent sessions in a 10-minute window on 2026-07-28, each with 5+ events. Bursty by nature — the swarm is spun up per wave of work, not held open. |
+| **Fan-out** | Subagents spend 32% of all tokens, 47% over the last 30 days. Work delegated by other agents, not by me. |
+| **Provider diversity** | 24 models across 9 labs, though one carries 82% of spend — the alternates are wired and exercised, not load-bearing. |
+| **Cost discipline** | 89% of tokens are cache reads at a tenth of input price. Cache is the difference between a swarm being affordable and being a science project. |
+| **Accounting** | 99% of tokens priced from a published card, 1.3% estimated, 0.0% unpriced — at the rate in force *when spent*. |
 <!-- END LIVE-TABLE -->
 
 The interesting problems at this scale are not prompting problems. They are coordination, attribution, recovery, and measurement problems — which is why most of what I build is infrastructure rather than applications.
@@ -86,10 +87,10 @@ The interesting problems at this scale are not prompting problems. They are coor
 **Tropical attention at the edge.** Replacing softmax with the max-plus (tropical) semiring, where `a ⊕ b = max(a,b)` and `a ⊗ b = a + b`. Every multiplication collapses into add-and-compare, which changes what the hardware has to be:
 
 - **Structurally predictable latency.** Re-bracketing attention as `(V ⊗ Kᵀ) ⊗ Q` never materializes the L×L matrix, so it maps onto an add/compare systolic array. Sub-millisecond determinism becomes a property of the algebra rather than something you measure and hope for.
-- **Full fidelity.** No floating-point accumulation, so results are exact rather than approximately reproducible.
-- **Interpretability that is not a heatmap.** The argmax at each node *is* a discrete route. You get genuine attributions and an ℓ∞ robustness certificate of radius ≥ min-gap/2 — a proof, not a saliency picture.
+- **Order-invariant.** The reduction is a max, not a sum, so a result does not depend on the order operands are combined in — bitwise reproducible across hardware rather than approximately so.
+- **Interpretability that is not a heatmap.** The argmax at each node *is* a discrete route, so attributions are exact rather than inferred, and each carries a margin: min-gap/2 on the scores. Input-space radii divide by the block's Lipschitz constant, since Q, K and V each carry a copy of the input.
 
-Built on Jeffrey Emanuel's [model_guided_research](https://github.com/Dicklesworthstone/model_guided_research), which explores eleven exotic mathematical structures as drop-in attention mechanisms. Carried into on-device safety inference and a scoring engine.
+Built on Jeffrey Emanuel's [model_guided_research](https://github.com/Dicklesworthstone/model_guided_research), which explores eleven exotic mathematical structures as transformer primitives — most as swappable attention blocks, plus an ordinal learning-rate schedule and a hyperreal optimizer. Carried into on-device safety inference and a scoring engine.
 
 ---
 
@@ -115,14 +116,14 @@ The badges above are not hand-typed, and the story of why they exist is the reas
 
 Every usage dashboard on my machine was wrong in a different way. One was reading a cache that had not updated in four months. Another counted characters instead of tokens. All of them either double-counted subagent transcripts or could not see them at all. So the reported estate was ~35B tokens.
 
-The audit put it at **81.7B** — the figure above is higher because it keeps moving. Three
-things had gone wrong:
+The audit put it at roughly **78B**, and the figure above is higher because it keeps
+moving. Three things had gone wrong:
 
 1. **Claude Code deletes transcripts after 30 days** by default (`cleanupPeriodDays`). April and May were simply gone from disk. The tell was that a cumulative counter had *fallen* — 56.62B in May, 46.90B in June. A total that decreases is proof of deletion, not of lower usage.
 2. **"Per-event data always wins" discarded 11.78B** of real subagent burn, because archive sources sometimes hold sessions the per-event stream never captured. The correct rule is max-per-session: both sources are floors.
 3. **22% of tokens were priced at $0** because they matched no pricing pattern, and one model was seeded 4× low.
 
-flightdeck exists so those failures are detectable rather than silent. It reconciles across sources, prices with effective dating, and reports the percentage of tokens matching no pricing rule so a silent $0 can never masquerade as thrift.
+flightdeck exists so those failures are detectable rather than silent. It reconciles across sources, prices with effective dating, and reports what share of tokens is priced from a published card versus estimated versus unpriced — so a silent $0 cannot masquerade as thrift. It still cannot see April 2026, which is why every total here is a floor.
 
 ---
 
