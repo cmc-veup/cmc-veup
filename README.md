@@ -60,7 +60,7 @@ I run an AWS partner business where delivery is increasingly executed by agent s
 <!-- BEGIN LIVE-TABLE -->
 | | |
 |---|---|
-| **Scale** | 123 concurrent agent sessions in a 10-minute window on 2026-07-28, each with 5+ events. Bursty by nature — the swarm is spun up per wave of work, not held open. |
+| **Scale** | 503 agents run on 2026-07-30, peaking at 115 concurrent and holding 100+ for 60 minutes. Swarms breathe: they scale to a wave of work and contract when it clears — the throughput is the point, not a headcount held open. |
 | **Fan-out** | Subagents spend 32% of all tokens, 47% over the last 30 days. Work delegated by other agents, not by me. |
 | **Provider diversity** | 24 models across 9 labs, though one carries 82% of spend — the alternates are wired and exercised, not load-bearing. |
 | **Cost discipline** | 89% of tokens are cache reads at a tenth of input price. Cache is the difference between a swarm being affordable and being a science project. |
