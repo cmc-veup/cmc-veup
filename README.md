@@ -43,8 +43,8 @@ Blue is work I direct. Amber is work the swarm directs on its own — about half
 
 <!-- BEGIN LIVE-SUMMARY -->
 > [!NOTE]
-> **84.6B tokens across 123 days**, on 24 models from 9 labs, 93% of it served
-> from cache. About 48% was spent by subagents rather than by me
+> **84.8B tokens across 123 days**, on 24 models from 9 labs, 93% of it served
+> from cache. About 47% was spent by subagents rather than by me
 > typing. These are not estimates — they are reconciled from the transcripts on
 > disk by [flightdeck](https://github.com/cmc-veup/flightdeck), and this paragraph
 > is regenerated hourly from the same data as the badges above.
@@ -60,7 +60,7 @@ I run an AWS partner business where delivery is increasingly executed by agent s
 | | |
 |---|---|
 | **Scale** | 123 sustained concurrent agent sessions at peak on 2026-07-28. Not a burst — sustained across a working day, against a shared work queue. |
-| **Fan-out** | 48% of recent tokens are spent by subagents. Much of the work is delegated by other agents, not by me. |
+| **Fan-out** | 47% of recent tokens are spent by subagents. Much of the work is delegated by other agents, not by me. |
 | **Provider diversity** | 24 models across 9 labs. No single-vendor dependency, and routing is a decision the model makes, not a hardcoded table. |
 | **Cost discipline** | 93% of tokens served from cache. Cache is the difference between a swarm being affordable and being a science project. |
 | **Accounting** | Every token attributed to a model, an account, a session, and a cost — priced at the rate in force *when it was spent*, not today's rate. |
