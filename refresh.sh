@@ -65,8 +65,8 @@ body = (
 table = "\n".join([
     "| | |",
     "|---|---|",
-    f"| **Scale** | 0 → {m['wave_ceiling']} agents, elastic · typical wave "
-    f"{m['wave_min']}–{m['wave_max']} · {m['swarm_peak']} concurrent at peak |",
+    f"| **Scale** | 0 → {m['wave_ceiling']} agents/day, elastic · typical wave "
+    f"{m['wave_min']}–{m['wave_max']} · {m['swarm_peak_hour']} in flight at peak hour |",
     f"| **Fan-out** | {m['subagent_pct']:.0f}% of recent tokens spent by subagents; "
     f"{m['subagent_pct_intact']:.0f}% across the months whose transcripts survived. |",
     f"| **Provider diversity** | {m['models']} models, {m['vendors']} labs — though one carries "
