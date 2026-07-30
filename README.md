@@ -43,7 +43,7 @@ Blue is work I direct. Amber is work the swarm directs on its own — about half
 
 <!-- BEGIN LIVE-SUMMARY -->
 > [!NOTE]
-> **84.4B tokens across 123 days**, on 24 models from 9 labs, 93% of it served
+> **84.6B tokens across 123 days**, on 24 models from 9 labs, 93% of it served
 > from cache. About 48% was spent by subagents rather than by me
 > typing. These are not estimates — they are reconciled from the transcripts on
 > disk by [flightdeck](https://github.com/cmc-veup/flightdeck), and this paragraph
