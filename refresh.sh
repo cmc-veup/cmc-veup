@@ -58,8 +58,8 @@ body = (
     f"({m['span_start']} to {m['span_end']}), on\n"
     f"> {m['models']} models from {m['vendors']} labs. {m['cache_read_pct']:.0f}% of tokens were "
     f"cache reads. Subagents spent\n"
-    f"> {m['subagent_pct_alltime']:.0f}% of the all-time total and "
-    f"{m['subagent_pct']:.0f}% over the last {m['window_days']} days. "
+    f"> {m['subagent_pct']:.0f}% of tokens over the last {m['window_days']} days "
+    f"({m['subagent_pct_intact']:.0f}% across every month whose\n> transcripts survived). "
     f"{100-m['unpriced_pct']-m['estimated_pct']:.0f}% of tokens are\n"
     "> priced from a published rate card. Reconciled by "
     "[flightdeck](https://github.com/cmc-veup/flightdeck) from the transcripts\n"
@@ -71,12 +71,15 @@ body = (
 table = "\n".join([
     "| | |",
     "|---|---|",
-    f"| **Scale** | {m['peak_sessions']} concurrent agent sessions in a 10-minute "
-    f"window on {m.get('peak_day') or 'the peak day'}, each with 5+ events. Bursty by "
-    "nature — the swarm is spun up per wave of work, not held open. |",
-    f"| **Fan-out** | Subagents spend {m['subagent_pct_alltime']:.0f}% of all tokens, "
-    f"{m['subagent_pct']:.0f}% over the last {m['window_days']} days. Work delegated by "
-    "other agents, not by me. |",
+    f"| **Scale** | {m['swarm_agents']} agents run on {m.get('peak_day')}, peaking at "
+    f"{m['swarm_peak']} concurrent and holding 100+ for {m['swarm_held_100']} minutes. Swarms "
+    "breathe: they scale to a wave of work and contract when it clears — the throughput is "
+    "the point, not a headcount held open. |",
+    f"| **Fan-out** | Subagents spend {m['subagent_pct']:.0f}% of recent tokens, "
+    f"{m['subagent_pct_intact']:.0f}% across the {m['intact_months']} months whose transcripts "
+    f"survived. The {m['damaged_months']} damaged months read lower only because their subagent "
+    "transcripts were deleted before anything indexed them — so the all-time figure is a floor, "
+    "not a measurement. |",
     f"| **Provider diversity** | {m['models']} models across {m['vendors']} labs, though "
     f"one carries {m['top_vendor_pct']:.0f}% of spend — the alternates are wired and "
     "exercised, not load-bearing. |",
