@@ -43,7 +43,7 @@ Blue is work I direct. Amber is work the swarm directs on its own — about half
 
 <!-- BEGIN LIVE-SUMMARY -->
 > [!NOTE]
-> **90.7B tokens** over 129 active days · 24 models · 9 labs · 90% cache reads · 48% spent by subagents.
+> **91.3B tokens** over 129 active days · 25 models · 9 labs · 90% cache reads · 49% spent by subagents.
 > Reconciled by [flightdeck](https://github.com/cmc-veup/flightdeck) from transcripts on disk, plus archives of the
 > months Claude Code deleted. April is still gone, so this is a floor. Regenerated hourly.
 <!-- END LIVE-SUMMARY -->
@@ -58,8 +58,8 @@ I run an AWS partner business where delivery is increasingly executed by agent s
 | | |
 |---|---|
 | **Scale** | 0 → 906 agents/day, elastic · typical wave 196–732 · 532 in flight at peak hour |
-| **Fan-out** | 48% of recent tokens spent by subagents; 38% across the months whose transcripts survived. |
-| **Provider diversity** | 24 models, 9 labs — though one carries 84% of spend. |
+| **Fan-out** | 49% of recent tokens spent by subagents; 38% across the months whose transcripts survived. |
+| **Provider diversity** | 25 models, 9 labs — though one carries 84% of spend. |
 | **Cost discipline** | 90% of tokens are cache reads, at a tenth of input price. |
 | **Accounting** | 99% priced from a published card, 1.1% estimated, 0.0% unpriced — at the rate in force *when spent*. |
 <!-- END LIVE-TABLE -->
