@@ -43,7 +43,7 @@ Blue is work I direct. Amber is work the swarm directs on its own — about half
 
 <!-- BEGIN LIVE-SUMMARY -->
 > [!NOTE]
-> **92.1B tokens** over 129 active days · 25 models · 9 labs · 90% cache reads · 48% spent by subagents.
+> **92.2B tokens** over 129 active days · 25 models · 9 labs · 90% cache reads · 48% spent by subagents.
 > Reconciled by [flightdeck](https://github.com/cmc-veup/flightdeck) from transcripts on disk, plus archives of the
 > months Claude Code deleted. April is still gone, so this is a floor. Regenerated hourly.
 <!-- END LIVE-SUMMARY -->
