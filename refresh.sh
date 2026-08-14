@@ -87,6 +87,24 @@ p.write_text(t)
 print("live blocks regenerated")
 PY
 
+# Cache-bust the badge images. Two independent caches sit between the JSON in
+# this repo and what a visitor sees: shields.io caches the endpoint response,
+# and GitHub's camo proxy caches the rendered PNG -- camo being the sticky one,
+# which is why the profile showed 101.4B while this repo already said 102.8B.
+# cacheSeconds asks shields to expire quickly; the rotating &v= stamp changes
+# the image URL each refresh, so camo treats it as a new asset instead of
+# serving its copy. Without the stamp, a shorter interval only makes the JSON
+# fresher while the visible badge stays stale.
+STAMP=$(date -u +%Y%m%d%H%M)
+python3 - "$STAMP" <<'BUST'
+import pathlib, re, sys
+stamp = sys.argv[1]
+p = pathlib.Path("README.md"); t = p.read_text()
+t = re.sub(r'(img\.shields\.io/endpoint\?url=[^)\s]*?)(&cacheSeconds=\d+)?(&v=\d+)?\)',
+           lambda m: f"{m.group(1)}&cacheSeconds=300&v={stamp})", t)
+p.write_text(t)
+BUST
+
 git add badges usage.svg README.md
 # Nothing changed is the common case on a quiet hour — not an error.
 if git diff --cached --quiet; then

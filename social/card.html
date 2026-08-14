@@ -1,0 +1,69 @@
+<!doctype html>
+<meta charset="utf-8">
+<title>social card</title>
+<style>
+  /* 1200x627 — LinkedIn's link/thumbnail spec (1.91:1), so nothing is cropped
+     when uploaded to a Featured item. Deterministic HTML->PNG rather than a
+     generated image: the claim here is that the figures are exact, and a
+     diffusion model cannot render numerals reliably — a mangled digit would
+     disprove the card's own point.
+
+     Every figure is a FLOOR or a structural fact, never a live reading. A
+     Featured thumbnail is uploaded once and never re-scraped, so anything that
+     can fall would eventually make the card false. These only grow. */
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  html, body { width: 1200px; height: 627px; }
+  body {
+    background: #0d0b14;
+    color: #f2f0f6;
+    font: 400 16px/1.4 ui-sans-serif, -apple-system, "SF Pro Text", "Helvetica Neue", sans-serif;
+    padding: 60px 66px 54px;
+    display: flex; flex-direction: column; justify-content: space-between;
+    position: relative; overflow: hidden;
+  }
+  /* One restrained accent wash. Indigo #5746C7 is the 2026 brand; the dark
+     ground is what earns the scroll-stop in a white LinkedIn feed. */
+  body::after {
+    content: ""; position: absolute; right: -170px; top: -210px;
+    width: 680px; height: 680px; border-radius: 50%;
+    background: radial-gradient(circle, rgba(87,70,199,.42) 0%, rgba(87,70,199,0) 68%);
+  }
+  .eyebrow {
+    font-size: 18px; letter-spacing: .22em; text-transform: uppercase;
+    color: #a99bf5; font-weight: 600;
+  }
+  h1 {
+    font-size: 116px; line-height: .94; letter-spacing: -.035em; font-weight: 680;
+    margin-top: 22px;
+  }
+  h1 small { font-size: 49px; font-weight: 560; letter-spacing: -.02em; color: #cfc8ea; }
+  .sub {
+    font-size: 24px; color: #b9b2cc; margin-top: 18px; letter-spacing: -.006em;
+    max-width: 860px; line-height: 1.35;
+  }
+  .stats { display: flex; gap: 54px; border-top: 1px solid #2b2740; padding-top: 24px; }
+  .stat .n { font-size: 37px; font-weight: 650; letter-spacing: -.025em; color: #fff; }
+  .stat .l { font-size: 15px; color: #928ba8; margin-top: 5px; letter-spacing: .012em; }
+  .foot {
+    position: absolute; right: 66px; bottom: 54px;
+    font-size: 15.5px; color: #7e7794; text-align: right; line-height: 1.55;
+  }
+  .foot b { color: #cfc8ea; font-weight: 560; }
+</style>
+
+<div class="eyebrow">Client delivery, instrumented</div>
+
+<div>
+  <h1>100B<small>+ tokens</small></h1>
+  <div class="sub">Reconciled from transcripts on disk across nine labs — not estimated,
+    not self-reported.</div>
+</div>
+
+<div class="stats">
+  <div class="stat"><div class="n">27</div><div class="l">models · 9 labs</div></div>
+  <div class="stat"><div class="n">700+</div><div class="l">agents/day · 163 concurrent</div></div>
+  <div class="stat"><div class="n">95%</div><div class="l">cache reads</div></div>
+  <div class="stat"><div class="n">6 mo</div><div class="l">continuously measured</div></div>
+</div>
+
+<div class="foot"><b>github.com/cmc-veup</b><br>open source · republished every 15 min</div>
