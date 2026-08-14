@@ -1,5 +1,5 @@
 {
-  "tokens": 103573670381,
+  "tokens": 103578327853,
   "days_active": 138,
   "days_covered": 138,
   "span_start": "2026-02-10",
@@ -14,8 +14,8 @@
   ],
   "intact_months": 5,
   "damaged_months": 2,
-  "cache_read_pct": 90.56578704844235,
-  "cache_pct": 94.69512008069967,
+  "cache_read_pct": 90.5661209905293,
+  "cache_pct": 94.69520141257458,
   "unpriced_pct": 0.0,
   "estimated_pct": 0.9499708255077242,
   "top_vendor_pct": 84.04713176491329,
