@@ -128,11 +128,13 @@ flightdeck exists so those failures are detectable rather than silent. It reconc
 
 **Structure in code, judgment in the model.** The application is dumb pipes; the model is the smart endpoint. Schema validation, budget caps, and retry policy belong in code. Ranking, classification, and "is this done" belong to the model. Every heuristic is a bet against the next model release, and that bet has lost every quarter so far.
 
+**Delivered work is the smaller of what you can produce and what you can verify.** Agents made production cheap and left verification exactly where it was. Buying more generation against an unchanged ability to check it buys nothing — the constraint moved to verification the moment generation got cheap, and most of this industry is still buying the other side of it.
+
+**A swarm scales by removing shared state, not by adding agents.** Every lock, gate, and central dispatcher turns parallel work back into serial work. What capped concurrency here was never compute — it was the number of things two agents could want at the same time.
+
 **A number you cannot audit is a number you cannot manage.** Most of this industry is reporting AI usage figures nobody has checked. Mine are checkable, which is the entire reason the collector is public.
 
 **Receipts or it did not happen.** Internal reporting rule: every claim links to a diff, a test, or a demo. Prose that cannot cite itself gets cut.
-
-**Identity comes from email, never display name.** Fuzzy matching is a last resort, never an entry point. An unresolvable entity stays unresolved rather than minting a junk canonical ID — the alternative is a corpus that quietly grows 290 records into 1,214.
 
 ---
 
