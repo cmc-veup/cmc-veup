@@ -8,6 +8,17 @@
 # Runs hourly via com.cmc.profile.refresh. Safe to run by hand.
 set -euo pipefail
 
+# Hard ceilings on every step that touches the DB or the network.
+#
+# A `badges` run wedged for 69 MINUTES on 2026-08-14 holding the SQLite write
+# lock (22s of CPU across the whole hour -- hung, not working). Every collect
+# behind it died with "database is locked", so the badges stopped advancing and
+# the profile appeared to freeze. Nothing detected it: launchd happily starts
+# the next copy on schedule and never notices the last one never returned.
+#
+# A timer that cannot fail is not a timer. `timeout` converts a hang from a
+# silent permanent outage into one skipped cycle.
+
 PROFILE="${PROFILE_REPO:-$HOME/projects/cmc-veup-profile}"
 FLIGHTDECK="${FLIGHTDECK_REPO:-$HOME/projects/flightdeck}"
 # Rank and tier come from the live board, never a constant. They were hardcoded
@@ -31,15 +42,15 @@ except Exception: print('')" 2>/dev/null || true)
 TIER="${VIBERANK_TIER:-Supernova}"
 
 cd "$FLIGHTDECK"
-python3 -m flightdeck.cli collect --quiet
+timeout 600 python3 -m flightdeck.cli collect --quiet || echo "profile: collect timed out or skipped — badges will use the current DB" >&2
 # No rank fetched: regenerate every other badge and leave viberank.json as it
 # was. Publishing a guessed position is worse than publishing yesterday's.
 if [ -n "$RANK" ]; then
-  python3 -m flightdeck.cli badges --out "$PROFILE" --rank "$RANK" --tier "$TIER" --days 30 >/dev/null
+  timeout 300 python3 -m flightdeck.cli badges --out "$PROFILE" --rank "$RANK" --tier "$TIER" --days 30 >/dev/null
 else
   echo "profile: rank fetch failed — keeping the previous viberank badge" >&2
   cp -f "$PROFILE/badges/viberank.json" /tmp/viberank.keep 2>/dev/null || true
-  python3 -m flightdeck.cli badges --out "$PROFILE" --days 30 >/dev/null
+  timeout 300 python3 -m flightdeck.cli badges --out "$PROFILE" --days 30 >/dev/null
   cp -f /tmp/viberank.keep "$PROFILE/badges/viberank.json" 2>/dev/null || true
 fi
 
