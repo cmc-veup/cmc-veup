@@ -20,6 +20,18 @@ run_capped() {   # run_capped <seconds> <cmd...>
   if [ -n "$TIMEOUT" ]; then "$TIMEOUT" "$secs" "$@"; else "$@"; fi
 }
 
+# `gh` is Homebrew too, and the SAME launchd PATH that hides `timeout` hides it.
+# A bare `gh auth token` under launchd resolves to nothing, so the owner-token
+# lookup below returned empty on EVERY scheduled run and silently took the
+# ambient-auth fallback -- the exact dependency on interactive state that the
+# fallback exists to avoid. It only looked fine because cmc-veup happened to be
+# the active account; the next `gh auth switch` froze the badges with a 403.
+# Resolve it explicitly, like TIMEOUT.
+GH=""
+for _c in /opt/homebrew/bin/gh /usr/local/bin/gh /usr/bin/gh; do
+  [ -x "$_c" ] && { GH="$_c"; break; }
+done
+
 # Hard ceilings on every step that touches the DB or the network.
 #
 # A `badges` run wedged for 69 MINUTES on 2026-08-14 holding the SQLite write
@@ -135,5 +147,27 @@ if git diff --cached --quiet; then
   exit 0
 fi
 git commit -qm "profile: refresh telemetry $(date -u +%Y-%m-%dT%H:%MZ)"
-git push -q origin main
+# Push as the repo's OWNER, explicitly.
+#
+# The osxkeychain helper serves whichever GitHub account is ambiently ACTIVE, so
+# a `gh auth switch` anywhere on this machine silently redirects this push. On
+# 2026-08-14 the job began pushing as justakeyboardbetweenus (switched for an
+# unrelated private-repo push) and every run afterwards died with
+# `403 Permission to cmc-veup/cmc-veup.git denied`, exiting 124. Badges froze for
+# an hour and nothing surfaced it: launchd records the exit code and no human
+# reads it.
+#
+# A scheduled job must not depend on ambient interactive state. Resolve a token
+# for the OWNING account out of gh's own store and push with that, so the job
+# stays correct no matter who is "active".
+_OWNER="${PROFILE_OWNER:-cmc-veup}"
+_TOKEN=$([ -n "$GH" ] && "$GH" auth token -u "$_OWNER" -h github.com 2>/dev/null || true)
+if [ -n "$_TOKEN" ]; then
+  # Token in the URL rather than a stored remote: nothing is written to
+  # .git/config, so the credential never persists on disk.
+  git push -q "https://x-access-token:${_TOKEN}@github.com/${_OWNER}/${_OWNER}.git" main
+else
+  echo "profile: no gh token for $_OWNER (gh resolved: ${GH:-NONE}) — falling back to ambient auth" >&2
+  git push -q origin main
+fi
 echo "profile: published $(git rev-parse --short HEAD)"
