@@ -15,12 +15,12 @@
 
 *Client delivery runs on an agent swarm. The tooling is public and the numbers are audited.*
 
-[![tokens](https://img.shields.io/endpoint?url=https%3A%2F%2Fraw.githubusercontent.com%2Fcmc-veup%2Fcmc-veup%2Fmain%2Fbadges%2Ftokens.json&cacheSeconds=300&v=202608262208)](https://github.com/cmc-veup/flightdeck)
-[![subagent share](https://img.shields.io/endpoint?url=https%3A%2F%2Fraw.githubusercontent.com%2Fcmc-veup%2Fcmc-veup%2Fmain%2Fbadges%2Fsubagents.json&cacheSeconds=300&v=202608262208)](https://github.com/cmc-veup/flightdeck)
-[![swarm](https://img.shields.io/endpoint?url=https%3A%2F%2Fraw.githubusercontent.com%2Fcmc-veup%2Fcmc-veup%2Fmain%2Fbadges%2Fswarm.json&cacheSeconds=300&v=202608262208)](https://github.com/cmc-veup/flightdeck)
-[![models](https://img.shields.io/endpoint?url=https%3A%2F%2Fraw.githubusercontent.com%2Fcmc-veup%2Fcmc-veup%2Fmain%2Fbadges%2Fmodels.json&cacheSeconds=300&v=202608262208)](https://github.com/cmc-veup/flightdeck)
-[![cache](https://img.shields.io/endpoint?url=https%3A%2F%2Fraw.githubusercontent.com%2Fcmc-veup%2Fcmc-veup%2Fmain%2Fbadges%2Fcache.json&cacheSeconds=300&v=202608262208)](https://github.com/cmc-veup/flightdeck)
-[![viberank](https://img.shields.io/endpoint?url=https%3A%2F%2Fraw.githubusercontent.com%2Fcmc-veup%2Fcmc-veup%2Fmain%2Fbadges%2Fviberank.json&cacheSeconds=300&v=202608262208)](https://viberank.app/profile/cmc-veup)
+[![tokens](https://img.shields.io/endpoint?url=https%3A%2F%2Fraw.githubusercontent.com%2Fcmc-veup%2Fcmc-veup%2Fmain%2Fbadges%2Ftokens.json&cacheSeconds=300&v=202608262224)](https://github.com/cmc-veup/flightdeck)
+[![subagent share](https://img.shields.io/endpoint?url=https%3A%2F%2Fraw.githubusercontent.com%2Fcmc-veup%2Fcmc-veup%2Fmain%2Fbadges%2Fsubagents.json&cacheSeconds=300&v=202608262224)](https://github.com/cmc-veup/flightdeck)
+[![swarm](https://img.shields.io/endpoint?url=https%3A%2F%2Fraw.githubusercontent.com%2Fcmc-veup%2Fcmc-veup%2Fmain%2Fbadges%2Fswarm.json&cacheSeconds=300&v=202608262224)](https://github.com/cmc-veup/flightdeck)
+[![models](https://img.shields.io/endpoint?url=https%3A%2F%2Fraw.githubusercontent.com%2Fcmc-veup%2Fcmc-veup%2Fmain%2Fbadges%2Fmodels.json&cacheSeconds=300&v=202608262224)](https://github.com/cmc-veup/flightdeck)
+[![cache](https://img.shields.io/endpoint?url=https%3A%2F%2Fraw.githubusercontent.com%2Fcmc-veup%2Fcmc-veup%2Fmain%2Fbadges%2Fcache.json&cacheSeconds=300&v=202608262224)](https://github.com/cmc-veup/flightdeck)
+[![viberank](https://img.shields.io/endpoint?url=https%3A%2F%2Fraw.githubusercontent.com%2Fcmc-veup%2Fcmc-veup%2Fmain%2Fbadges%2Fviberank.json&cacheSeconds=300&v=202608262224)](https://viberank.app/profile/cmc-veup)
 
 [![LinkedIn](https://img.shields.io/badge/LinkedIn-2b2b2b?style=flat-square&logo=linkedin&logoColor=0A66C2)](https://www.linkedin.com/in/cbxmc/)
 [![VeUP](https://img.shields.io/badge/veup.com-2b2b2b?style=flat-square&logo=google-chrome&logoColor=white)](https://veup.com)
@@ -43,7 +43,7 @@ Blue is work I direct. Amber is work the swarm directs on its own — about half
 
 <!-- BEGIN LIVE-SUMMARY -->
 > [!NOTE]
-> **124.4B tokens** over 149 active days · 28 models · 9 labs · 92% cache reads · 54% spent by subagents.
+> **124.6B tokens** over 149 active days · 28 models · 9 labs · 92% cache reads · 54% spent by subagents.
 > Reconciled by [flightdeck](https://github.com/cmc-veup/flightdeck) from transcripts on disk, plus archives of the
 > months Claude Code deleted. April is still gone, so this is a floor. Regenerated hourly.
 <!-- END LIVE-SUMMARY -->
