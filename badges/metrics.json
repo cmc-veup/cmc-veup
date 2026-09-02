@@ -1,11 +1,11 @@
 {
-  "tokens": 131954548301,
+  "tokens": 131959987206,
   "days_active": 156,
   "days_covered": 156,
   "span_start": "2026-02-10",
   "span_end": "2026-09-02",
-  "subagent_pct": 56.33802664397779,
-  "subagent_pct_alltime": 42.600943936970296,
+  "subagent_pct": 56.32978197408365,
+  "subagent_pct_alltime": 42.59855069630485,
   "subagent_pct_intact": 41.20001552851801,
   "delegating_providers": [
     "claude",
@@ -14,11 +14,11 @@
   ],
   "intact_months": 5,
   "damaged_months": 3,
-  "cache_read_pct": 91.97044418407245,
-  "cache_pct": 95.98136207256368,
+  "cache_read_pct": 91.96847062242307,
+  "cache_pct": 95.98154481618732,
   "unpriced_pct": 0.0,
-  "estimated_pct": 0.6920633663479367,
-  "top_vendor_pct": 85.41665395535586,
+  "estimated_pct": 0.6920273514738401,
+  "top_vendor_pct": 85.4174128705033,
   "models": 28,
   "vendors": 9,
   "peak_sessions": 21,
@@ -34,6 +34,6 @@
   "wave_ceiling": 906,
   "wave_max": 0,
   "window_days": 30,
-  "rank": null,
-  "tier": null
+  "rank": 19,
+  "tier": "Supernova"
 }
