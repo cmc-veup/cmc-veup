@@ -15,12 +15,12 @@
 
 *Client delivery runs on an agent swarm. The tooling is public and the numbers are audited.*
 
-[![tokens](https://img.shields.io/endpoint?url=https%3A%2F%2Fraw.githubusercontent.com%2Fcmc-veup%2Fcmc-veup%2Fmain%2Fbadges%2Ftokens.json&cacheSeconds=300&v=202611192257)](https://github.com/cmc-veup/flightdeck)
-[![subagent share](https://img.shields.io/endpoint?url=https%3A%2F%2Fraw.githubusercontent.com%2Fcmc-veup%2Fcmc-veup%2Fmain%2Fbadges%2Fsubagents.json&cacheSeconds=300&v=202611192257)](https://github.com/cmc-veup/flightdeck)
-[![swarm](https://img.shields.io/endpoint?url=https%3A%2F%2Fraw.githubusercontent.com%2Fcmc-veup%2Fcmc-veup%2Fmain%2Fbadges%2Fswarm.json&cacheSeconds=300&v=202611192257)](https://github.com/cmc-veup/flightdeck)
-[![models](https://img.shields.io/endpoint?url=https%3A%2F%2Fraw.githubusercontent.com%2Fcmc-veup%2Fcmc-veup%2Fmain%2Fbadges%2Fmodels.json&cacheSeconds=300&v=202611192257)](https://github.com/cmc-veup/flightdeck)
-[![cache](https://img.shields.io/endpoint?url=https%3A%2F%2Fraw.githubusercontent.com%2Fcmc-veup%2Fcmc-veup%2Fmain%2Fbadges%2Fcache.json&cacheSeconds=300&v=202611192257)](https://github.com/cmc-veup/flightdeck)
-[![viberank](https://img.shields.io/endpoint?url=https%3A%2F%2Fraw.githubusercontent.com%2Fcmc-veup%2Fcmc-veup%2Fmain%2Fbadges%2Fviberank.json&cacheSeconds=300&v=202611192257)](https://viberank.app/profile/cmc-veup)
+[![tokens](https://img.shields.io/endpoint?url=https%3A%2F%2Fraw.githubusercontent.com%2Fcmc-veup%2Fcmc-veup%2Fmain%2Fbadges%2Ftokens.json&cacheSeconds=300&v=202611192310)](https://github.com/cmc-veup/flightdeck)
+[![subagent share](https://img.shields.io/endpoint?url=https%3A%2F%2Fraw.githubusercontent.com%2Fcmc-veup%2Fcmc-veup%2Fmain%2Fbadges%2Fsubagents.json&cacheSeconds=300&v=202611192310)](https://github.com/cmc-veup/flightdeck)
+[![swarm](https://img.shields.io/endpoint?url=https%3A%2F%2Fraw.githubusercontent.com%2Fcmc-veup%2Fcmc-veup%2Fmain%2Fbadges%2Fswarm.json&cacheSeconds=300&v=202611192310)](https://github.com/cmc-veup/flightdeck)
+[![models](https://img.shields.io/endpoint?url=https%3A%2F%2Fraw.githubusercontent.com%2Fcmc-veup%2Fcmc-veup%2Fmain%2Fbadges%2Fmodels.json&cacheSeconds=300&v=202611192310)](https://github.com/cmc-veup/flightdeck)
+[![cache](https://img.shields.io/endpoint?url=https%3A%2F%2Fraw.githubusercontent.com%2Fcmc-veup%2Fcmc-veup%2Fmain%2Fbadges%2Fcache.json&cacheSeconds=300&v=202611192310)](https://github.com/cmc-veup/flightdeck)
+[![viberank](https://img.shields.io/endpoint?url=https%3A%2F%2Fraw.githubusercontent.com%2Fcmc-veup%2Fcmc-veup%2Fmain%2Fbadges%2Fviberank.json&cacheSeconds=300&v=202611192310)](https://viberank.app/profile/cmc-veup)
 
 [![LinkedIn](https://img.shields.io/badge/LinkedIn-2b2b2b?style=flat-square&logo=linkedin&logoColor=0A66C2)](https://www.linkedin.com/in/cbxmc/)
 [![VeUP](https://img.shields.io/badge/veup.com-2b2b2b?style=flat-square&logo=google-chrome&logoColor=white)](https://veup.com)
@@ -43,7 +43,7 @@ Blue is work I direct. Amber is work the swarm directs on its own — about half
 
 <!-- BEGIN LIVE-SUMMARY -->
 > [!NOTE]
-> **219.1B tokens** over 201 active days · 34 models · 9 labs · 94% cache reads · 73% spent by subagents.
+> **219.3B tokens** over 201 active days · 34 models · 9 labs · 94% cache reads · 74% spent by subagents.
 > Reconciled by [flightdeck](https://github.com/cmc-veup/flightdeck) from transcripts on disk, plus archives of the
 > months Claude Code deleted. April is still gone, so this is a floor. Regenerated hourly.
 <!-- END LIVE-SUMMARY -->
@@ -58,7 +58,7 @@ I run an AWS partner business where delivery is increasingly executed by agent s
 | | |
 |---|---|
 | **Scale** | 0 → 906 agents/day, elastic · typical wave 0–0 · 28 in flight at peak hour |
-| **Fan-out** | 73% of recent tokens spent by subagents; 51% across the months whose transcripts survived. |
+| **Fan-out** | 74% of recent tokens spent by subagents; 51% across the months whose transcripts survived. |
 | **Provider diversity** | 34 models, 9 labs — though one carries 92% of spend. |
 | **Cost discipline** | 94% of tokens are cache reads, at a tenth of input price. |
 | **Accounting** | 100% priced from a published card, 0.4% estimated, 0.0% unpriced — at the rate in force *when spent*. |
